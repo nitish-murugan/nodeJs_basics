@@ -1,0 +1,17 @@
+{
+  "name": "lesson3_packagemanager",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "lesson3_packagemanager": "file:",
+    "lodash": "^4.17.21"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
