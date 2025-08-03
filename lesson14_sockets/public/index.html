@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="user-list">
+        <h3> Online Users </h3>
+        <ul id="users"></ul>
+    </div>
+    <div id="chat"></div>
+
+    <form id="message-form">
+        <input type="text" id="messageBox" placeholder="Enter your text" required>
+        <button type="submit"> Send </button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        const chat = document.getElementById('chat');
+        const users = document.getElementById('users');
+        const messageForm = document.getElementById('message-form');
+        const inputMessage = document.getElementById('messageBox');
+
+        const userName = prompt("Enter your name");
+        socket.emit('join', userName);
+        socket.on('joinedUser', (userName)=>{
+            addMessage(`${userName} has joined the chat`);
+        });
+        socket.on('userList', (userList)=>{
+            users.innerHTML = userList.map(user=> `<li> ${user}</li>`).join("");
+        });
+        socket.on('userLeft', (message)=>{
+            addMessage(`${message} has left the chat`);
+        });
+        
+        messageForm.addEventListener('submit', (event)=>{
+            event.preventDefault();
+            const extractMsg = inputMessage.value;
+            socket.emit('chatMessage', {
+                userName, message: extractMsg
+            });
+            inputMessage.value = "";
+        });
+
+        socket.on('chatMessage', (message)=>{
+            addMessage(`${message.userName}: ${message.message}`);
+        });
+
+        function addMessage(input){
+            const addMsgContent = document.createElement('div');
+            addMsgContent.textContent = input;
+            chat.appendChild(addMsgContent);
+
+            //scroll top to the chat
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+    </script>
+</body>
+</html>
