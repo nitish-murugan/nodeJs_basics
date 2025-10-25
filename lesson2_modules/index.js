@@ -9,3 +9,5 @@ console.log(moduleObj1.mul(10,9));
 
 var name = "Nitish";
 console.log(`Hello ${name}`);
+
+console.log(moduleObj1.fn());

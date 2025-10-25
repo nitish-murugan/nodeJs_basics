@@ -9,11 +9,11 @@ console.log("End of the program");
 
 
 function divideNum(a,b){
-    return new Promise((resolve, reject)=>{
+    return new Promise((re, rej)=>{
         if(b===0){
-            reject("Cannot divide any number by zero");
+            rej("Cannot divide any number by zero");
         } else{
-            resolve(a/b);
+            re(a/b);
         }
     })
 }

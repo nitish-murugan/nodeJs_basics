@@ -7,10 +7,18 @@ function div(a,b){
     return a/b;
 }
 
+mul = function(a,b){return a*b;}
+
+
+const fn = ()=>{
+    return "Hello";
+}
+
 module.exports = {
     add,
     sub,
-    div
+    div,
+    mul,
+    fn
 };
 
-module.exports.mul = function(a,b){return a*b;}
